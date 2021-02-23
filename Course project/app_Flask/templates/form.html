@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block title %}Heart failure clinical records{% endblock %}
+{% block t %}Example
+{'age':75.0,
+            'anaemia':0,
+            'creatinine_phosphokinase':582,
+            'diabetes':0,
+            'ejection_fraction':45,
+            'high_blood_pressure':1,
+            'platelets':263358.03,
+            'serum_creatinine':1.18,
+            'serum_sodium':137,
+            'sex':1,
+            'smoking':0,
+            'time':4}
+{% endblock %}
+{% block content %}
+<h1 class="text-center">Please fill out the form below</h1>
+<br>
+<div class="row d-flex justify-content-center">
+<div class="col-md-6">
+    <form method="POST" action="{{ url_for('predict_form') }}">
+        <div class="form-group row">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                {{ field.label(class="col-form-label col-sm-4") }}
+                {{ field(class="form-control col-sm-6") }}
+            {% endfor %}
+        </div>
+         <div class="text-center">
+        <button type="submit" class="btn btn-info">Predict</button>
+         </div>
+    </form>
+</div>
+</div>
+{% endblock %}
